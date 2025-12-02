@@ -20,10 +20,11 @@ public class AiService {
     private final PromptBuilder promptBuilder;
 
     public MealSuggestionResponse runLlm(FormData formData) {
+        log.info("FormData: {}", formData.toString());
         String prompt = promptBuilder.buildMealSuggestionPrompt(formData);
         log.debug("Prompt: {}", prompt);
-        String responseText = model.generate(prompt);
         log.info("Running Prompt...");
+        String responseText = model.generate(prompt);
         return MealSuggestionMapper.mapPromptResponseToDTO(responseText);
     }
 
